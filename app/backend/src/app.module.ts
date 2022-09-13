@@ -13,10 +13,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         type: 'mysql',
-        host: configService.get('DB_HOST', '172.20.0.2'),
-        port: Number(configService.get('DB_PORT', 3002)),
+        host: configService.get('DB_HOST', '172.17.0.2'),
+        port: Number(configService.get('DB_PORT', '3306')),
         username: configService.get('DB_USER', 'root'),
-        password: configService.get('DB_PASS'),
+        password: configService.get('DB_PASS', '123456'),
         database: configService.get('DB_NAME', 'blogs_api'),
         entities: [],
         synchronize: true,
