@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { UserModule } from './user/user.module';
+import { PostResolver } from './post/post.resolver';
+import { PostModule } from './post/post.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
@@ -25,8 +27,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
     }),
+    UserModule,
+    PostModule,
+    CategoryModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  providers: [PostResolver],
 })
 export class AppModule {}
